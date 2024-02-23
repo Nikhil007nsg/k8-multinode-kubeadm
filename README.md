@@ -145,6 +145,8 @@ kubectl get pods --all-namespaces
 
 ## Join Nodes
 To add nodes to the cluster, run the kubeadm join command with the appropriate arguments on each node. The command will output a token that can be used to join the node to the cluster.
+kubeadm join 172.xx.xx.xx:6443 --token eu7cnv.jdmi0p97il12j17ya \
+	--discovery-token-ca-cert-hash sha256:d47fb4fed1c07b7cddd7aaf35341839d5bcd45a34fda716dfe48b2013a37885c
 ## Important Links
 https://www.youtube.com/watch?v=pcADx8JFUIA
 https://www.youtube.com/watch?v=Zxozz8P_l5M
