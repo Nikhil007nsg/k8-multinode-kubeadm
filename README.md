@@ -113,7 +113,8 @@ sudo sysctl -w net.ipv4.ip_forward=1
 Use the following command to initialize the cluster:
 ```
 sudo kubeadm init --pod-network-cidr=10.244.0.0/16
-```
+## If you are using public ip
+sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-cert-extra-sans=PUBLIC_IP_MASTER_NODE
 
 Create a .kube directory in your home directory:
 ```
