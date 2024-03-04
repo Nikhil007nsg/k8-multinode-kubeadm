@@ -108,6 +108,25 @@ sudo modprobe br_netfilter
 Add some settings to sysctl
 ```
 sudo sysctl -w net.ipv4.ip_forward=1
+
+## If you are using NAT public ip then exicute following command
+
+on master:
+iptables -t nat -A OUTPUT -d <Private IP of node> -j DNAT --to-destination <Public IP of node>
+on node:
+iptables -t nat -A OUTPUT -d <Private IP of master> -j DNAT --to-destination <Public IP of master>
+
+kube join
+
+# Example
+# on node
+sudo iptables -t nat -A OUTPUT -d 172.xx.xx.xx -j DNAT --to-destination 103.xx.xx.xx
+
+
+# on master
+sudo iptables -t nat -A OUTPUT -d 172.xx.xx.xx -j DNAT --to-destination 122.xx.xx.xx
+
+
 ```
 ## Initialize the Cluster (Run only on master)
 Use the following command to initialize the cluster:
