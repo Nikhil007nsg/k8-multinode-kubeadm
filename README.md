@@ -100,7 +100,7 @@ If there are any swap entries in the /etc/fstab file, remove them using a text e
 sudo nano /etc/fstab
 ```
 
-Enable kernel modules
+##Enable kernel modules
 ```
 sudo modprobe br_netfilter
 ```
