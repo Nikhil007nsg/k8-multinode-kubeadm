@@ -94,8 +94,7 @@ Disable swap using the following command:
 ```
 sudo swapoff -a
 ```
-
-If there are any swap entries in the /etc/fstab file, remove them using a text editor such as nano:
+# If there are any swap entries in the /etc/fstab file, remove them using a text editor such as nano:
 ```
 sudo nano /etc/fstab
 ```
@@ -108,7 +107,7 @@ sudo modprobe br_netfilter
 Add some settings to sysctl
 ```
 sudo sysctl -w net.ipv4.ip_forward=1
-
+```
 ## If you are using NAT public ip then exicute following command
 
 on master:
@@ -127,13 +126,14 @@ sudo iptables -t nat -A OUTPUT -d 172.xx.xx.xx -j DNAT --to-destination 103.xx.x
 sudo iptables -t nat -A OUTPUT -d 172.xx.xx.xx -j DNAT --to-destination 122.xx.xx.xx
 
 
-```
-## Initialize the Cluster (Run only on master)
+
+# Initialize the Cluster (Run only on master)
+
 Use the following command to initialize the cluster:
-```
+
 sudo kubeadm init --pod-network-cidr=10.244.0.0/16
 
-## If you are using public ip
+# If you are using public ip
 ```
 sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-cert-extra-sans=PUBLIC_IP_MASTER_NODE
 ```
@@ -155,15 +155,28 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ## Install Flannel (Run only on master)
 Use the following command to install Flannel:
 
-```
+``
 kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/v0.20.2/Documentation/kube-flannel.yml
 
-```
-**For Multi-Network Edit kube-flannel.yaml file**
-```
-wget https://raw.githubusercontent.com/flannel-io/flannel/v0.20.2/Documentation/kube-flannel.yml
-```
+# For Multi-Network Edit kube-flannel.yaml file
 
+wget https://raw.githubusercontent.com/flannel-io/flannel/v0.20.2/Documentation/kube-flannel.yml
+
+# Add below environment to .yaml file
+
+- name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: KUBERNETES_SERVICE_HOST
+              value: '<IP Master/DNS Master>' #ip address or dns of the host where kube-apiservice is running
+            - name: KUBERNETES_SERVICE_PORT
+
+ # Apply kubectl command
+ 
+ kubectl apply -f kube-flannel.yaml
+  
+  
 ## Verify Installation
 Verify that all the pods are up and running:
 
@@ -180,21 +193,22 @@ kubeadm join
 https://www.youtube.com/watch?v=pcADx8JFUIA
 https://www.youtube.com/watch?v=Zxozz8P_l5M
 <!--
+```
 # Multi-Node Kubernetes Cluster Setup Using Kubeadm Using Docker CE Runtime
 ## 1. Upgrade your Ubuntu servers
-
+```
 Provision the servers to be used in the deployment of Kubernetes on Ubuntu 22.04. The setup process will vary depending on the virtualization or cloud environment you’re using.
 
 Once the servers are ready, update them.
-```
+
 sudo apt update
 sudo apt -y full-upgrade
 [ -f /var/run/reboot-required ] && sudo reboot -f
-```
-## 2. Install kubelet, kubeadm and kubectl
+
+# 2. Install kubelet, kubeadm and kubectl
 
 Once the servers are rebooted, add Kubernetes repository for Ubuntu 22.04 to all the servers.
-```
+
 sudo apt install curl apt-transport-https -y
 curl -fsSL  https://packages.cloud.google.com/apt/doc/apt-key.gpg|sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/k8s.gpg
 echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
