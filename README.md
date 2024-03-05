@@ -112,7 +112,7 @@ sudo sysctl -w net.ipv4.ip_forward=1
 
 on master:
 
-iptables -t nat -A OUTPUT -d <Private IP of node> -j DNAT --to-destination <Public IP of node>
+iptables -t nat -A OUTPUT -d Private IP of node -j DNAT --to-destination <Public IP of node>
 
 on node:
 
