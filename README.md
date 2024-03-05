@@ -196,11 +196,17 @@ sudo kubeadm join <MASTER_IP>:<MASTER_PORT> --token <TOKEN> --discovery-token-ca
 
 # For other network vm/instance
 Open this file
+
 sudo nano /var/lib/kubelet/kubeadm-flags.env
+
 Add last KUBELET_KUBEADM_ARGS .....
+
 --node-ip=public_Ip 
+
 systemctl restart kubelet ....(In Master as well as Node)
- systemctl restart docker, 
+
+ systemctl restart docker
+ 
  sudo systemctl status kubelet
 
 ## Important Links
