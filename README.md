@@ -165,7 +165,9 @@ wget https://raw.githubusercontent.com/flannel-io/flannel/v0.20.2/Documentation/
 # Add below environment to .yaml file
 
 - name: POD_NAMESPACE
+  
               valueFrom:
+  
                 fieldRef:
                   fieldPath: metadata.namespace
             - name: KUBERNETES_SERVICE_HOST
