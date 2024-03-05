@@ -194,7 +194,7 @@ To add nodes to the cluster, run the kubeadm join command with the appropriate a
 sudo kubeadm join <MASTER_IP>:<MASTER_PORT> --token <TOKEN> --discovery-token-ca-cert-hash sha256:<CA_CERT_HASH>
  
 
-# For other network vm/instance
+# For other network node
 Open this file
 
 sudo nano /var/lib/kubelet/kubeadm-flags.env
