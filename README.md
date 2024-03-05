@@ -168,6 +168,7 @@ wget https://raw.githubusercontent.com/flannel-io/flannel/v0.20.2/Documentation/
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
+  
             - name: KUBERNETES_SERVICE_HOST
               value: '<IP Master/DNS Master>' #ip address or dns of the host where kube-apiservice is running
             - name: KUBERNETES_SERVICE_PORT
