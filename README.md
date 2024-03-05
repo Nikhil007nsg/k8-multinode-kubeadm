@@ -154,8 +154,10 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 ## Install Flannel (Run only on master)
 Use the following command to install Flannel:
+
 ```
 kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/v0.20.2/Documentation/kube-flannel.yml
+
 ```
 
 ## Verify Installation
