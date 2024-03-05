@@ -111,11 +111,13 @@ sudo sysctl -w net.ipv4.ip_forward=1
 ## If you are using NAT public ip then exicute following command
 
 on master:
+
 iptables -t nat -A OUTPUT -d <Private IP of node> -j DNAT --to-destination <Public IP of node>
+
 on node:
+
 iptables -t nat -A OUTPUT -d <Private IP of master> -j DNAT --to-destination <Public IP of master>
 
-kube join
 
 # Example
 # on node
