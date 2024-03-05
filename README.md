@@ -116,7 +116,7 @@ iptables -t nat -A OUTPUT -d Private IP of node -j DNAT --to-destination Public 
 
 on node:
 
-iptables -t nat -A OUTPUT -d <Private IP of master> -j DNAT --to-destination <Public IP of master>
+iptables -t nat -A OUTPUT -d Private IP of master -j DNAT --to-destination Public IP of master
 
 
 # Example
