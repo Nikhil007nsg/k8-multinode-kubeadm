@@ -100,7 +100,7 @@ If there are any swap entries in the /etc/fstab file, remove them using a text e
 sudo nano /etc/fstab
 ```
 
-##Enable kernel modules
+Enable kernel modules
 ```
 sudo modprobe br_netfilter
 ```
@@ -158,6 +158,10 @@ Use the following command to install Flannel:
 ```
 kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/v0.20.2/Documentation/kube-flannel.yml
 
+```
+**For Multi-Network Edit kube-flannel.yaml file**
+```
+wget https://raw.githubusercontent.com/flannel-io/flannel/v0.20.2/Documentation/kube-flannel.yml
 ```
 
 ## Verify Installation
