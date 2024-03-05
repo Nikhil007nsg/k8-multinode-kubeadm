@@ -191,7 +191,17 @@ kubectl get pods --all-namespaces
 ## Join Nodes
 To add nodes to the cluster, run the kubeadm join command with the appropriate arguments on each node. The command will output a token that can be used to join the node to the cluster.
 
-kubeadm join
+sudo kubeadm join <MASTER_IP>:<MASTER_PORT> --token <TOKEN> --discovery-token-ca-cert-hash sha256:<CA_CERT_HASH>
+ 
+
+# For other network vm/instance
+Open this file
+sudo nano /var/lib/kubelet/kubeadm-flags.env
+Add last KUBELET_KUBEADM_ARGS .....
+--node-ip=public_Ip 
+systemctl restart kubelet ....(In Master as well as Node)
+ systemctl restart docker, 
+ sudo systemctl status kubelet
 
 ## Important Links
 https://www.youtube.com/watch?v=pcADx8JFUIA
