@@ -67,6 +67,19 @@ Set SystemdCgroup to true:
 ```
 SystemdCgroup = true
 ```
+# Edit Cgroup
+ docker info | grep -i cgroup
+
+ sudo nano /etc/default/grub
+
+ Add this line -  GRUB_CMDLINE_LINUX="systemd.unified_cgroup_hierarchy=1"
+
+ sudo update-grub
+
+ sudo reboot
+ 
+
+
 
 ```OR```
 Using single command
@@ -83,6 +96,27 @@ sudo systemctl restart containerd
 To install Kubernetes, use the following commands:
 
 ```
+
+
+sudo apt-get update
+
+# apt-transport-https may be a dummy package; if so, you can skip that package
+sudo apt-get install -y apt-transport-https ca-certificates curl gpg
+
+mkdir -p /etc/apt/keyrings
+sudo mkdir -p -m 755 /etc/apt/keyrings
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+# This overwrites any existing configuration in /etc/apt/sources.list.d/kubernetes.list
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+
+sudo apt-get update
+sudo apt-get install -y kubelet kubeadm kubectl
+sudo apt-mark hold kubelet kubeadm kubectl
+sudo systemctl enable --now kubelet
+
+```
+# Old Package
+
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
 sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
 sudo apt install kubeadm kubelet kubectl kubernetes-cni
@@ -108,25 +142,6 @@ Add some settings to sysctl
 ```
 sudo sysctl -w net.ipv4.ip_forward=1
 ```
-## If you are using NAT public ip then exicute following command
-
-on master:
-
-iptables -t nat -A OUTPUT -d Private IP of node -j DNAT --to-destination Public IP of node
-
-on node:
-
-iptables -t nat -A OUTPUT -d Private IP of master -j DNAT --to-destination Public IP of master
-
-
-# Example
-# on node
-sudo iptables -t nat -A OUTPUT -d 172.xx.xx.xx -j DNAT --to-destination 103.xx.xx.xx
-
-
-# on master
-sudo iptables -t nat -A OUTPUT -d 172.xx.xx.xx -j DNAT --to-destination 122.xx.xx.xx
-
 
 
 # Initialize the Cluster (Run only on master)
