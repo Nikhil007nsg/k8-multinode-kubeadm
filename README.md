@@ -127,8 +127,8 @@ sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
 
 sudo apt install kubeadm kubelet kubectl kubernetes-cni
 ```
-
-## Disable swap
+```
+# Disable swap
 Disable swap using the following command:
 
 ```
@@ -139,12 +139,12 @@ sudo swapoff -a
 sudo nano /etc/fstab
 ```
 
-Enable kernel modules
+# Enable kernel modules
 ```
 sudo modprobe br_netfilter
 ```
 
-Add some settings to sysctl
+# Add some settings to sysctl
 ```
 sudo sysctl -w net.ipv4.ip_forward=1
 ```
@@ -185,17 +185,6 @@ kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/v0.20.2/Do
 
 wget https://raw.githubusercontent.com/flannel-io/flannel/v0.20.2/Documentation/kube-flannel.yml
 
-# Add below environment to .yaml file
-
-- name: POD_NAMESPACE
-  
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.namespace
-  
-            - name: KUBERNETES_SERVICE_HOST
-              value: '<IP Master/DNS Master>' #ip address or dns of the host where kube-apiservice is running
-            - name: KUBERNETES_SERVICE_PORT
 
  # Apply kubectl command
  
