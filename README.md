@@ -67,7 +67,18 @@ Set SystemdCgroup to true:
 ```
 SystemdCgroup = true
 ```
-# Edit Cgroup
+```OR```
+Using single command
+```
+sudo sed -i 's/\(SystemdCgroup\s*=\s*\)false/\1true/' /etc/containerd/config.toml && sudo cat /etc/containerd/config.toml
+
+```
+Restart containerd:
+```
+sudo systemctl restart containerd
+```
+# Edit Cgroup (If you want to change cgroup to systemd)
+
  docker info | grep -i cgroup
 
  sudo nano /etc/default/grub
@@ -81,22 +92,10 @@ SystemdCgroup = true
 
 
 
-```OR```
-Using single command
-```
-sudo sed -i 's/\(SystemdCgroup\s*=\s*\)false/\1true/' /etc/containerd/config.toml && sudo cat /etc/containerd/config.toml
 
-```
-Restart containerd:
-```
-sudo systemctl restart containerd
-```
 
 ## Install Kubernetes
-To install Kubernetes, use the following commands:
-
-```
-
+To install Kubernetes, use the following commands
 
 sudo apt-get update
 
@@ -114,11 +113,12 @@ sudo apt-get install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 sudo systemctl enable --now kubelet
 
-```
 # Old Package
 
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
+
 sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+
 sudo apt install kubeadm kubelet kubectl kubernetes-cni
 ```
 
