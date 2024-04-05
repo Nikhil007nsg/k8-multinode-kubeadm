@@ -118,14 +118,6 @@ sudo apt-get install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 
 sudo systemctl enable --now kubelet
-
-# Old Package
-
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
-
-sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
-
-sudo apt install kubeadm kubelet kubectl kubernetes-cni
 ```
 ```
 # Disable swap
