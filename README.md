@@ -93,12 +93,13 @@ sudo systemctl restart containerd
 
 
 
-
+```
 ## Install Kubernetes
+```
 To install Kubernetes, use the following commands
-
+```
 sudo apt-get update
-
+```
 # apt-transport-https may be a dummy package; if so, you can skip that package
 
 sudo apt-get install -y apt-transport-https ca-certificates curl gpg
