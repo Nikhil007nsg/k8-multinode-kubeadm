@@ -78,20 +78,22 @@ Restart containerd:
 sudo systemctl restart containerd
 ```
 # Edit Cgroup (If you want to change cgroup to systemd)
-
+```
  docker info | grep -i cgroup
-
+```
+```
  sudo nano /etc/default/grub
-
- Add this line -  GRUB_CMDLINE_LINUX="systemd.unified_cgroup_hierarchy=1"
-
+```
+# Add this line -
+```
+GRUB_CMDLINE_LINUX="systemd.unified_cgroup_hierarchy=1"
+```
+```
  sudo update-grub
-
+```
+```
  sudo reboot
- 
-
-
-
+ ```
 
 
 ## Install Kubernetes
@@ -103,7 +105,9 @@ sudo apt-get update
 ```
 sudo apt-get install -y apt-transport-https ca-certificates curl gpg
 ```
+```
 sudo mkdir -p -m 755 /etc/apt/keyrings
+```
 ```
 curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 ```
