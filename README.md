@@ -115,11 +115,15 @@ curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --
 ```
 echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
 ```
+```
 sudo apt-get update
+```
 ```
 sudo apt-get install -y kubelet kubeadm kubectl
 ```
+```
 sudo apt-mark hold kubelet kubeadm kubectl
+```
 ```
 sudo systemctl enable --now kubelet
 ```
@@ -155,37 +159,36 @@ sudo kubeadm init --pod-network-cidr=10.244.0.0/16
 ```
 sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-cert-extra-sans=PUBLIC_IP_MASTER_NODE
 ```
-Create a .kube directory in your home directory:
+
+# Create a .kube directory in your home directory:
 ```
 mkdir -p $HOME/.kube
 ```
 
-Copy the Kubernetes configuration file to your home directory:
+# Copy the Kubernetes configuration file to your home directory:
 ```
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 ```
 
-Change ownership of the file:
+# Change ownership of the file:
 ```
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
 ## Install Flannel (Run only on master)
 Use the following command to install Flannel:
-
 ```
-
 kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/v0.20.2/Documentation/kube-flannel.yml
 ```
 # For Multi-Network Edit kube-flannel.yaml file
-
+```
 wget https://raw.githubusercontent.com/flannel-io/flannel/v0.20.2/Documentation/kube-flannel.yml
-
+```
 
  # Apply kubectl command
- 
+ ```
  kubectl apply -f kube-flannel.yaml
-  
+```
   
 ## Verify Installation
 Verify that all the pods are up and running:
