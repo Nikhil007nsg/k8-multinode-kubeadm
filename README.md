@@ -93,33 +93,31 @@ sudo systemctl restart containerd
 
 
 
-```
+
 ## Install Kubernetes
-```
 To install Kubernetes, use the following commands
 ```
 sudo apt-get update
 ```
 # apt-transport-https may be a dummy package; if so, you can skip that package
-
-sudo apt-get install -y apt-transport-https ca-certificates curl gpg
-
-sudo mkdir -p -m 755 /etc/apt/keyrings
-
-curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
-
-# This overwrites any existing configuration in /etc/apt/sources.list.d/kubernetes.list
-
-echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
-
-sudo apt-get update
-
-sudo apt-get install -y kubelet kubeadm kubectl
-
-sudo apt-mark hold kubelet kubeadm kubectl
-
-sudo systemctl enable --now kubelet
 ```
+sudo apt-get install -y apt-transport-https ca-certificates curl gpg
+```
+sudo mkdir -p -m 755 /etc/apt/keyrings
+```
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+```
+# This overwrites any existing configuration in /etc/apt/sources.list.d/kubernetes.list
+```
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+```
+sudo apt-get update
+```
+sudo apt-get install -y kubelet kubeadm kubectl
+```
+sudo apt-mark hold kubelet kubeadm kubectl
+```
+sudo systemctl enable --now kubelet
 ```
 # Disable swap
 Disable swap using the following command:
@@ -146,9 +144,9 @@ sudo sysctl -w net.ipv4.ip_forward=1
 # Initialize the Cluster (Run only on master)
 
 Use the following command to initialize the cluster:
-
+```
 sudo kubeadm init --pod-network-cidr=10.244.0.0/16
-
+```
 # If you are using public ip
 ```
 sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-cert-extra-sans=PUBLIC_IP_MASTER_NODE
