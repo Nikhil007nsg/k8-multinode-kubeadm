@@ -170,6 +170,7 @@ kubeadm token create --print-join-command --certificate-key <YOUR_CERTIFICATE_KE
 ```
 Use below command in other nodes
 ```
+```
 sudo kubeadm join EXISTING_MASTER_PRIVATE_IP:6443 --token <YOUR_TOKEN> \
     --discovery-token-ca-cert-hash sha256:<YOUR_HASH> \
     --control-plane --certificate-key <YOUR_CERTIFICATE_KEY>
