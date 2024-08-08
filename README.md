@@ -156,6 +156,26 @@ Use the following command to initialize the cluster:
 ```
 sudo kubeadm init --pod-network-cidr=10.244.0.0/16
 ```
+# Multi-Master node control plane 
+Use this command for retrive the current configuration
+```
+kubectl -n kube-system get cm kubeadm-config -o yaml > kubeadm-config.yaml
+```
+Add controlPlaneEndpoint: "EXISTING_MASTER_PRIVATE_IP:6443" below cluster name save it and apply 
+kubectl apply -f .
+```
+kubeadm init phase upload-certs --upload-certs
+```
+kubeadm token create --print-join-command --certificate-key <YOUR_CERTIFICATE_KEY>
+```
+Use below command in other nodes
+```
+sudo kubeadm join EXISTING_MASTER_PRIVATE_IP:6443 --token <YOUR_TOKEN> \
+    --discovery-token-ca-cert-hash sha256:<YOUR_HASH> \
+    --control-plane --certificate-key <YOUR_CERTIFICATE_KEY>
+```
+
+
 # If you are using public ip
 ```
 sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-cert-extra-sans=PUBLIC_IP_MASTER_NODE
