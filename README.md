@@ -166,10 +166,10 @@ kubectl apply -f .
 ```
 kubeadm init phase upload-certs --upload-certs
 ```
+```
 kubeadm token create --print-join-command --certificate-key <YOUR_CERTIFICATE_KEY>
 ```
 Use below command in other nodes
-```
 ```
 sudo kubeadm join EXISTING_MASTER_PRIVATE_IP:6443 --token <YOUR_TOKEN> \
     --discovery-token-ca-cert-hash sha256:<YOUR_HASH> \
