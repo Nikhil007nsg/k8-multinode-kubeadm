@@ -103,8 +103,14 @@ To install Kubernetes, use the following commands
 sudo apt-get update
 ```
 # apt-transport-https may be a dummy package; if so, you can skip that package
+# Old version 
 ```
-sudo apt-get install -y apt-transport-https ca-certificates curl gpg
+ sudo apt-get install -y apt-transport-https ca-certificates curl gpg 
+```
+# New Version
+```
+sudo apt-get install -y apt-transport-https ca-certificates curl gnupg   
+
 ```
 ```
 sudo mkdir -p -m 755 /etc/apt/keyrings
