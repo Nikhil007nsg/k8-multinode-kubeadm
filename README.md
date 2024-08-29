@@ -115,13 +115,31 @@ sudo apt-get install -y apt-transport-https ca-certificates curl gnupg
 ```
 sudo mkdir -p -m 755 /etc/apt/keyrings
 ```
+# Old packages (V1.29)
 ```
 curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 ```
-# This overwrites any existing configuration in /etc/apt/sources.list.d/kubernetes.list
+# New Packages (V1.31)
+```
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.31/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+```
+# allow unprivileged APT programs to read this keyring
+```
+sudo chmod 644 /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+```
+
+# (Old Version) This overwrites any existing configuration in /etc/apt/sources.list.d/kubernetes.list
 ```
 echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
 ```
+# (New Version) This overwrites any existing configuration in /etc/apt/sources.list.d/kubernetes.list
+```
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.31/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+```
+```
+sudo chmod 644 /etc/apt/sources.list.d/kubernetes.list
+```
+
 ```
 sudo apt-get update
 ```
