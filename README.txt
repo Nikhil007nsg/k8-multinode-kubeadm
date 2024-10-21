@@ -36,8 +36,9 @@ step 1 - check version of kubeadm,kubectl,kubelet in control plane
           kubectl version
           kubelet version
 
-step 2 - Now upgrade kubeadm to the desired version v 1.31.0
+step 2 - Now upgrade kubeadm to the desired version v 1.31.0 
 
+        apt-mark unhold kubeadm
         sudo apt-get update
         sudo apt-get install -y kubeadm=1.31.0
         sudo kubeadm version
@@ -50,11 +51,18 @@ step 4 - After confirming the version and plan, upgrade the Kubernetes control p
 
         sudo kubeadm upgrade apply v1.31.0
 
+# if you do not want to upgrade the etcd, use the flag
+
+       sudo kubeadm upgrade apply v1.31.0 --etcd-upgrade=false
+
 step 5 -  After upgrading kubeadm, you need to upgrade kubelet and kubectl on the control plane node:
 
+        apt-mark unhold kubelet kubect
         sudo apt-get install -y kubelet=1.31.0 kubectl=1.31.0
         sudo systemctl daemon-reload
         sudo systemctl restart kubelet
+        apt-mark hold kubelet kubectl
+ 
 
 step 6 - After the upgrade is successful and the control plane is functional, you can uncordon the node to allow scheduling:
 
